@@ -6,7 +6,7 @@ CREATE TABLE user (
     role VARCHAR(20),
 ) ENGINE=INNODB;
 
-CREATE TABLE Identite (
+CREATE TABLE identite (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     race VARCHAR(40) NOT NULL,
     poids DECIMAL(5,2),
@@ -18,4 +18,47 @@ CREATE TABLE Identite (
         REFERENCES caracteristique(id)
 ) ENGINE=INNODB;
 
+CREATE TABLE caracteristique (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    pv SMALLINT(4) NOT NULL,
+    pm SMALLINT(4) NOT NULL,
+    endurance SMALLINT(3) NOT NULL,
+    intelligence SMALLINT(3) NOT NULL,
+    constitution SMALLINT(3) NOT NULL,
+    initiative SMALLINT(3) NOT NULL,
+    sagesse SMALLINT(3) NOT NULL,
+    chance SMALLINT(3) NOT NULL,
+    strengh SMALLINT(3) NOT NULL,
+    dexterite SMALLINT(3) NOT NULL,
+    potentiel SMALLINT(3) NOT NULL,
+    foi SMALLINT(3) NOT NULL,
+    bpv SMALLINT(3) NOT NULL,
+    bpm SMALLINT(3) NOT NULL,
+    physique SMALLINT(3) NOT NULL,
+    magique SMALLINT(3) NOT NULL,
+    dot SMALLINT(3) NOT NULL,
+    absp SMALLINT(3) NOT NULL,
+    absm SMALLINT(3) NOT NULL,
+    mana SMALLINT(3) NOT NULL,
+) ENGINE=INNODB;
+
+CREATE TABLE bijoux (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    carac1 VARCHAR(50),
+    bonus1 SMALLINT(3),
+    carac2 VARCHAR(50),
+    bonus2 SMALLINT(3), 
+    carac3 VARCHAR(50),
+    bonus3 SMALLINT(3),
+) ENGINE=INNODB;
+
+CREATE TABLE sort (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(250) NOT NULL,
+    valeur SMALLINT(3) NOT NULL,
+    dot SMALLINT(3) NOT NULL,
+    mana SMALLINT(3) NOT NULL,
+    basesort VARCHAR(50) NOT NULL,
+    typesort VARCHAR(50) NOT NULL,
+) ENGINE=INNODB;
 
