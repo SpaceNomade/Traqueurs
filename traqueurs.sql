@@ -62,3 +62,62 @@ CREATE TABLE sort (
     typesort VARCHAR(50) NOT NULL,
 ) ENGINE=INNODB;
 
+CREATE TABLE personnage (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    CONSTRAINT id_user     
+        FOREIGN KEY (user)          
+        REFERENCES user(id),
+    CONSTRAINT id_partie
+        FOREIGN KEY (partie)
+        REFERENCES partie(id),
+    CONSTRAINT id_race     
+        FOREIGN KEY (race)          
+        REFERENCES race(id),
+    CONSTRAINT id_xp     
+        FOREIGN KEY (xp)          
+        REFERENCES xp(id),
+    CONSTRAINT id_partcularite     
+        FOREIGN KEY (particularite)          
+        REFERENCES particularite(id),
+    CONSTRAINT id_equipement     
+        FOREIGN KEY (equipement)          
+        REFERENCES equipement(id),
+    CONSTRAINT id_sort     
+        FOREIGN KEY (sort)          
+        REFERENCES sort(id),
+    CONSTRAINT id_inventaire     
+        FOREIGN KEY (inventaire)          
+        REFERENCES inventaire(id),
+) ENGINE=INNODB;
+
+CREATE TABLE inventaire_col (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    essence INT(6),
+    gold INT(6),
+    objet VARCHAR(250),
+) ENGINE=INNODB;
+
+CREATE TABLE particularite (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    vertus VARCHAR(30),
+    corruption VARCHAR(30),
+) ENGINE_INNODB;
+
+CREATE TABLE arme (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    classification VARCHAR(30),
+    valeur_ph INT(3),
+    valeur_mg INT(3),
+    portee INT(3),
+    dot INT(3),
+    special TEXT,
+) ENGINE_INNODB;
+
+CREATE TABLE armure (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    classe VARCHAR(30),
+    classification VARCHAR(30),
+    valeur ph INT(3),
+    valeur_mg INT(3),
+    poids DECIMAL(4,2),
+) ENGINE_INNODB;
