@@ -92,32 +92,80 @@ CREATE TABLE personnage (
 
 CREATE TABLE inventaire_col (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    essence INT(6),
-    gold INT(6),
-    objet VARCHAR(250),
+    essence INT(6) NOT NULL,
+    gold INT(6) NOT NULL,
+    objet VARCHAR(250) NOT NULL,
 ) ENGINE=INNODB;
 
 CREATE TABLE particularite (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    vertus VARCHAR(30),
-    corruption VARCHAR(30),
+    vertus VARCHAR(30) NOT NULL,
+    corruption VARCHAR(30) NOT NULL,
 ) ENGINE_INNODB;
 
 CREATE TABLE arme (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    classification VARCHAR(30),
-    valeur_ph INT(3),
-    valeur_mg INT(3),
+    classification VARCHAR(30) NOT NULL,
+    valeur_ph INT(3) NOT NULL,
+    valeur_mg INT(3) NOT NULL,
     portee INT(3),
-    dot INT(3),
+    dot INT(3) NOT NULL,
     special TEXT,
 ) ENGINE_INNODB;
 
 CREATE TABLE armure (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    classe VARCHAR(30),
-    classification VARCHAR(30),
-    valeur ph INT(3),
-    valeur_mg INT(3),
-    poids DECIMAL(4,2),
+    classe VARCHAR(30) NOT NULL,
+    classification VARCHAR(30) NOT NULL,
+    valeur ph INT(3) NOT NULL,
+    valeur_mg INT(3) NOT NULL,
+    poids DECIMAL(4,2) NOT NULL,
+) ENGINE_INNODB;
+
+CREATE TABLE equipement (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    CONSTRAINT id_personnage
+        FOREIGN KEY (personnage)
+        REFERENCES personnage(id)
+    CONSTRAINT id_arme
+        FOREIGN KEY (arme)
+        REFERENCES arme(id)
+    CONSTRAINT id_armure
+        FOREIGN KEY (armure)
+        REFERENCE armure(id)
+    CONSTRAINT id_bouclier
+        FOREIGN KEY (bouclier)
+        REFERENCE bouclier(id)
+    CONSTRAINT id_bijoux
+        FOREIGN KEY (bijoux)
+        REFERENCE bijoux(id)
+) ENGINE_INNODB;
+
+CREATE TABLE xp (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    courbe INT(10) NOT NULL,
+) ENGINE_INNODB;
+
+CREATE TABLE bouclier (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    abs_ph INT(3) NOT NULL,
+    abs_mg INT(3) NOT NULL,
+    valeur_ph INT(3) NOT NULL,
+    valeur_mg INT(3) NOT NULL,
+    poids DECIMAL(5,2) NOT NULL,
+    dot INT(2) NOT NULL,
+) ENGINE_INNODB;
+
+CREATE TABLE partie (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    CONSTRAINT id_personnage
+        FOREIGN KEY (personnage)
+        REFERENCES personnage(id)
+) ENGINE_INNODB;
+
+CREATE TABLE iventaire (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY
+    essence INT(6) NOT NULL,
+    gold INT(6) NOT NULL,
+    object VARCHAR(250) NOT NULL,
 ) ENGINE_INNODB;
