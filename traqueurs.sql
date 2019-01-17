@@ -3,7 +3,7 @@ CREATE TABLE user (
     mpd VARCHAR(40) NOT NULL,
     nom VARCHAR(20) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    role VARCHAR(20),
+    statut VARCHAR(20),
 ) ENGINE=INNODB;
 
 CREATE TABLE identite (
