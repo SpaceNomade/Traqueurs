@@ -1,0 +1,17 @@
+{
+    "name": "florian/architecture",
+    "authors": [
+        {
+            "name": "Florian",
+            "email": "fridel.florian@hotmail.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App"
+        }
+    },
+    "require": {
+        "bramus/router": "~1.3"
+    }
+}
