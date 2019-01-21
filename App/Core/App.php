@@ -2,7 +2,7 @@
 namespace App\Core;
 
 class App {
-    const DB_NAME = 'traqueurs';
+    const DB_NAME = 'test';
     const DB_HOST = 'localhost';
     const DB_USER = 'kevin';
     const DB_PASS = '';

@@ -8,6 +8,7 @@ $router = new Bramus\Router\Router();
 
 $router->get('/', 'App\Controller\HomeController@show');
 
+
 $router->mount('/persos', function() use ($router) {
     $router->get('/(\d+)', 'App\Controller\PersoController@show');
 });

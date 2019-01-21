@@ -1,12 +1,15 @@
 <?php
+session_start();
 define('ROOT', dirname(__DIR__));
-var_dump(ROOT);
+// var_dump(ROOT);
 
 require '../vendor/autoload.php';
 
 $router = new Bramus\Router\Router();
 
 $router->get('/', 'App\Controller\HomeController@show');
+$router->post('/connexion', 'App\Controller\UserController@verifier');
+$router->get('/form', 'App\Controller\UserController@form');
 
 $router->mount('/persos', function() use ($router) {
     $router->get('/(\d+)', 'App\Controller\PersoController@show');
@@ -17,5 +20,5 @@ $router->set404(function(){
     echo "404, route not found";
 });
 
-var_dump($router);
+// var_dump($router);
 $router->run();
