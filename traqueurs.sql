@@ -1,24 +1,12 @@
-CREATE TABLE user (
+CREATE TABLE IF NOT EXISTS utilisateur (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     mpd VARCHAR(40) NOT NULL,
     nom VARCHAR(20) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    statut VARCHAR(20),
+    statut VARCHAR(20)    
 ) ENGINE=INNODB;
 
-CREATE TABLE identite (
-    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    race VARCHAR(40) NOT NULL,
-    poids DECIMAL(5,2),
-    taille DECIMAL(3,2) NOT NULL,
-    genre VARCHAR(1) NOT NULL,
-    age INT(4),
-    CONSTRAINT id_caracteristique     
-        FOREIGN KEY (caracteristique)          
-        REFERENCES caracteristique(id)
-) ENGINE=INNODB;
-
-CREATE TABLE caracteristique (
+CREATE TABLE IF NOT EXISTS caracteristique (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     pv SMALLINT(4) NOT NULL,
     pm SMALLINT(4) NOT NULL,
@@ -39,133 +27,149 @@ CREATE TABLE caracteristique (
     dot SMALLINT(3) NOT NULL,
     absp SMALLINT(3) NOT NULL,
     absm SMALLINT(3) NOT NULL,
-    mana SMALLINT(3) NOT NULL,
+    mana SMALLINT(3) NOT NULL
 ) ENGINE=INNODB;
 
-CREATE TABLE bijoux (
+CREATE TABLE IF NOT EXISTS identite (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    race VARCHAR(40) NOT NULL,
+    poids DECIMAL(5,2),
+    taille DECIMAL(3,2) NOT NULL,
+    genre VARCHAR(1) NOT NULL,
+    age INT(4)
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS bijoux (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     carac1 VARCHAR(50),
     bonus1 SMALLINT(3),
     carac2 VARCHAR(50),
     bonus2 SMALLINT(3), 
     carac3 VARCHAR(50),
-    bonus3 SMALLINT(3),
+    bonus3 SMALLINT(3)
 ) ENGINE=INNODB;
 
-CREATE TABLE sort (
+CREATE TABLE IF NOT EXISTS sort (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(250) NOT NULL,
     valeur SMALLINT(3) NOT NULL,
     dot SMALLINT(3) NOT NULL,
     mana SMALLINT(3) NOT NULL,
     basesort VARCHAR(50) NOT NULL,
-    typesort VARCHAR(50) NOT NULL,
+    typesort VARCHAR(50) NOT NULL
 ) ENGINE=INNODB;
 
-CREATE TABLE personnage (
+CREATE TABLE IF NOT EXISTS personnage (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    CONSTRAINT id_user     
-        FOREIGN KEY (user)          
-        REFERENCES user(id),
-    CONSTRAINT id_partie
-        FOREIGN KEY (partie)
+    id_utilisateur SMALLINT UNSIGNED,
+    id_identite SMALLINT UNSIGNED,
+    id_xp SMALLINT UNSIGNED,
+    id_particularite SMALLINT UNSIGNED,
+    id_equipement SMALLINT UNSIGNED,
+    id_sort SMALLINT UNSIGNED,
+    id_inventaire SMALLINT UNSIGNED,   
+    id_partie SMALLINT UNSIGNED, 
+    CONSTRAINT id_utilisateur_fk    
+        FOREIGN KEY (id_utilisateur)          
+        REFERENCES utilisateur(id),
+    CONSTRAINT id_partie_fk
+        FOREIGN KEY (id_partie)
         REFERENCES partie(id),
-    CONSTRAINT id_race     
-        FOREIGN KEY (race)          
-        REFERENCES race(id),
-    CONSTRAINT id_xp     
-        FOREIGN KEY (xp)          
+    CONSTRAINT id_identite_fk     
+        FOREIGN KEY (id_identite)          
+        REFERENCES identite(id),
+    CONSTRAINT id_xp_fk     
+        FOREIGN KEY (id_xp)          
         REFERENCES xp(id),
-    CONSTRAINT id_partcularite     
-        FOREIGN KEY (particularite)          
+    CONSTRAINT id_particularite_fk     
+        FOREIGN KEY (id_particularite)          
         REFERENCES particularite(id),
-    CONSTRAINT id_equipement     
-        FOREIGN KEY (equipement)          
+    CONSTRAINT id_equipement_fk     
+        FOREIGN KEY (id_equipement)          
         REFERENCES equipement(id),
-    CONSTRAINT id_sort     
-        FOREIGN KEY (sort)          
+    CONSTRAINT id_sort_fk     
+        FOREIGN KEY (id_sort)          
         REFERENCES sort(id),
-    CONSTRAINT id_inventaire     
-        FOREIGN KEY (inventaire)          
-        REFERENCES inventaire(id),
+    CONSTRAINT id_inventaire_fk     
+        FOREIGN KEY (id_inventaire)          
+        REFERENCES inventaire(id)
 ) ENGINE=INNODB;
 
-CREATE TABLE inventaire_col (
+CREATE TABLE IF NOT EXISTS inventaire_col (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     essence INT(6) NOT NULL,
     gold INT(6) NOT NULL,
-    objet VARCHAR(250) NOT NULL,
+    objet VARCHAR(250) NOT NULL
 ) ENGINE=INNODB;
 
-CREATE TABLE particularite (
+CREATE TABLE IF NOT EXISTS particularite (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     vertus VARCHAR(30) NOT NULL,
-    corruption VARCHAR(30) NOT NULL,
-) ENGINE_INNODB;
+    corruption VARCHAR(30) NOT NULL
+) ENGINE=INNODB;
 
-CREATE TABLE arme (
+CREATE TABLE IF NOT EXISTS arme (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     classification VARCHAR(30) NOT NULL,
     valeur_ph INT(3) NOT NULL,
     valeur_mg INT(3) NOT NULL,
     portee INT(3),
     dot INT(3) NOT NULL,
-    special TEXT,
-) ENGINE_INNODB;
+    special TEXT
+) ENGINE=INNODB;
 
-CREATE TABLE armure (
+CREATE TABLE IF NOT EXISTS armure (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     classe VARCHAR(30) NOT NULL,
     classification VARCHAR(30) NOT NULL,
-    valeur ph INT(3) NOT NULL,
+    valeur_ph INT(3) NOT NULL,
     valeur_mg INT(3) NOT NULL,
-    poids DECIMAL(4,2) NOT NULL,
-) ENGINE_INNODB;
+    poids DECIMAL(4,2) NOT NULL
+) ENGINE=INNODB;
 
-CREATE TABLE equipement (
+CREATE TABLE IF NOT EXISTS equipement (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    CONSTRAINT id_personnage
-        FOREIGN KEY (personnage)
-        REFERENCES personnage(id)
+    id_arme SMALLINT UNSIGNED,
+    id_armure SMALLINT UNSIGNED,
+    id_bouclier SMALLINT UNSIGNED,
+    id_bijoux SMALLINT UNSIGNED,
     CONSTRAINT id_arme
-        FOREIGN KEY (arme)
-        REFERENCES arme(id)
+        FOREIGN KEY (id_arme)
+        REFERENCES arme(id),
     CONSTRAINT id_armure
-        FOREIGN KEY (armure)
-        REFERENCE armure(id)
+        FOREIGN KEY (id_armure)
+        REFERENCES armure(id),
     CONSTRAINT id_bouclier
-        FOREIGN KEY (bouclier)
-        REFERENCE bouclier(id)
+        FOREIGN KEY (id_bouclier)
+        REFERENCES bouclier(id),
     CONSTRAINT id_bijoux
-        FOREIGN KEY (bijoux)
-        REFERENCE bijoux(id)
-) ENGINE_INNODB;
+        FOREIGN KEY (id_bijoux)
+        REFERENCES bijoux(id)
+) ENGINE = INNODB;
 
-CREATE TABLE xp (
+CREATE TABLE IF NOT EXISTS xp (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    courbe INT(10) NOT NULL,
-) ENGINE_INNODB;
+    courbe INT(10) NOT NULL
+) ENGINE = INNODB;
 
-CREATE TABLE bouclier (
+CREATE TABLE IF NOT EXISTS bouclier (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     abs_ph INT(3) NOT NULL,
     abs_mg INT(3) NOT NULL,
     valeur_ph INT(3) NOT NULL,
     valeur_mg INT(3) NOT NULL,
     poids DECIMAL(5,2) NOT NULL,
-    dot INT(2) NOT NULL,
+    dot INT(2) NOT NULL
 ) ENGINE_INNODB;
 
-CREATE TABLE partie (
+CREATE TABLE IF NOT EXISTS partie (
     id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    CONSTRAINT id_personnage
-        FOREIGN KEY (personnage)
-        REFERENCES personnage(id)
-) ENGINE_INNODB;
+    nom VARCHAR (255) NOT NULL
+) ENGINE=INNODB;
 
-CREATE TABLE iventaire (
-    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY
+CREATE TABLE IF NOT EXISTS inventaire (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     essence INT(6) NOT NULL,
     gold INT(6) NOT NULL,
-    object VARCHAR(250) NOT NULL,
+    object VARCHAR(250) NOT NULL
 ) ENGINE_INNODB;
