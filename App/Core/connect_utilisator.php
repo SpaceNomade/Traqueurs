@@ -30,6 +30,5 @@ else{
     $nam->bindParam("user", $user, PDO::PARAM_STR);
     $nam->execute();
     $name = $nam->fetch();
-    $nom = $name["nom"];
-
+    $nom = $name["nom"];    
 }

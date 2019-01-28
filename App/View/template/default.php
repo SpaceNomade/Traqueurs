@@ -23,6 +23,12 @@
     </div>
 </nav>
 
+<form action="../../Controller/UserController.php"method="POST">
+    <input type="Text" name="email">
+    <input type="password" name="password" id="">
+    <button type="submit">Connexion</button>
+</form>
+
 <?= $content ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -2,9 +2,9 @@
 namespace App\Core;
 
 class App {
-    const DB_NAME = 'rpg';
+    const DB_NAME = 'traqueurs';
     const DB_HOST = 'localhost';
-    const DB_USER = 'florian';
+    const DB_USER = 'root';
     const DB_PASS = '';
 
     private static $database;

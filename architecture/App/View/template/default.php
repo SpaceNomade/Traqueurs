@@ -10,7 +10,7 @@
     <title>ArkhamPG</title>
 </head>
 <body>
-<nav class="uk-navbar-container uk-margin" uk-navbar>
+<nav class="navbar navbar-expand-lg" uk-navbar>
     <div class="uk-navbar-left">
 
         <a class="uk-navbar-item uk-logo" href="#">Logo</a>
