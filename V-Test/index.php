@@ -25,14 +25,14 @@
                      <input type="email" placeholder="Votre mail" id="email" name="email" value=" " />
                   </td>
                </tr>
-               <tr>
-                  <td align="right">
-                     <label for="email2">Confirmation de votre email :</label>
-                  </td>
-                  <td>
-                     <input type="email" placeholder="Confirmez votre mail" id="email2" name="email2" value=" " />
-                  </td>
-               </tr>
+               <!-- <tr> -->
+                  <!-- <td align="right"> -->
+                     <!-- <label for="email2">Confirmation de votre email :</label> -->
+                  <!-- </td> -->
+                  <!-- <td> -->
+                     <!-- <input type="email" placeholder="Confirmez votre mail" id="email2" name="email2" value=" " /> -->
+                  <!-- </td> -->
+               <!-- </tr> -->
                <tr>
                   <td align="right">
                      <label for="mdp"> Insérer votre mot de passe :</label>

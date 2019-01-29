@@ -36,7 +36,7 @@ else {
          $_SESSION['id'] = $userinfo['id'];
          $_SESSION['nom'] = $userinfo['nom'];
          $_SESSION['email'] = $userinfo['email'];
-         header("Location: profil.php?id=".$_SESSION['id']);
+         header("Location: profil.php?id=".$userinfo['id']);
       } else {
          $erreur = "Mauvais mail ou mot de passe ! hkjhkh";
       }

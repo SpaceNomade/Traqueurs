@@ -12,7 +12,7 @@ else {
 if(isset($_POST['forminscription'])) {
    $nom = htmlspecialchars($_POST['nom']);
    $email = htmlspecialchars($_POST['email']);
-   $email2 = htmlspecialchars($_POST['email2']);
+   // $email2 = htmlspecialchars($_POST['email2']);
    $mdp = htmlspecialchars($_POST['mdp']);
    $mdp2 = htmlspecialchars($_POST['mdp2']);
    $hash = password_hash($mdp,PASSWORD_DEFAULT);
@@ -32,7 +32,9 @@ if(isset($_POST['forminscription'])) {
                      $insertmbr->bindParam(":email",$email,PDO::PARAM_STR);
                      $insertmbr->bindParam(":mdp",$hash,PDO::PARAM_STR);
                      $insertmbr->execute();
+                     $lastId = $bdd->lastInsertId();
                      $erreur = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
+                     header('Location: profil.php?id='.$lastId);
                   } else {
                      echo ($erreur = "Vos mots de passes ne correspondent pas !");
                   }
