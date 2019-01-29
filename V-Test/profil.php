@@ -1,19 +1,24 @@
 <?php
 session_start();
+var_dump($_SESSION);
 
 $bdd =new PDO('mysql:host=localhost; dbname=traqueurs; charset=utf8','root','');
+$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 var_dump($bdd);
 
 // $requser = $bdd->prepare('SELECT utilisateur.id FROM utilisateur WHERE id = :id');
 // $requser->execute(array($getid));
 // $userinfo = $requser->fetch();
 
-if(isset($_GET['id']) AND $_GET['id'] > 0) {
+if(isset($_GET['id']) AND $_GET['id'] > 0):
    $getid = intval($_GET['id']);
-   $requser = $bdd->prepare('SELECT utilisateur.id FROM utilisateur WHERE id = :id');
-   $requser->bindParam(":id",$id,PDO::PARAM_INT);
-   $requser->execute(array($getid));
-   $userinfo = $requser->fetch();
+   $requser = $bdd->prepare('SELECT utilisateur.id, utilisateur.nom, utilisateur.email, utilisateur.statut FROM utilisateur WHERE utilisateur.id = :id');
+   $requser->bindParam(":id",$getid,PDO::PARAM_INT);
+   $requser->execute();
+   $userinfo = $requser->fetch(PDO::FETCH_ASSOC);
+
+   // die(var_dump($userinfo, $getid));
+
 ?>
 <html>
    <head>
@@ -40,6 +45,4 @@ if(isset($_GET['id']) AND $_GET['id'] > 0) {
       </div>
    </body>
 </html>
-<?php   
-}
-?>
+      <?php   endif; ?>

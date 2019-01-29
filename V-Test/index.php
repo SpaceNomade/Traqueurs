@@ -7,7 +7,7 @@
       <div align="center">
          <h2>Inscription</h2>
          <br /><br />
-         <form method="POST" action="profil.php">
+         <form method="POST" action="inscription.php">
             <table>
                <tr>
                   <td align="right">
